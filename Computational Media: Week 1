@@ -1,11 +1,11 @@
 function setup() {
-  createCanvas(400, 400);
+  createCanvas(350, 350);
 }
 
 function draw() {
   background(150);
   stroke (5);
-  
+    
   fill (250, 100, 0);
   triangle (50, 95, 55, 50, 80, 75);
   
@@ -22,6 +22,10 @@ function draw() {
   
   fill (200, 50, 40)
   triangle(84, 135, 105, 135, 94, 115);
+  
+  fill (255, 0, 0);
+  triangle (58, 81, 59, 61, 72, 74);
+  triangle (110, 74, 101, 55, 96, 70);
   
   line(55, 120, 92, 130);
   line(55, 140, 92, 130);
@@ -45,6 +49,14 @@ function draw() {
   
   stroke (5)
   noFill ()
-  ellipse (380, 380, 25);
+  ellipse (300, 300, 25);
+  
+  stroke (5)
+  noFill ()
+  ellipse (310, 310, 25);
+  
+  stroke (5)
+  noFill ()
+  ellipse (310, 300, 25);
 
 }
