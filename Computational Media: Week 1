@@ -54,10 +54,10 @@ function draw() {
   quad(138, 256, 186, 210, 175, 263, 150, 200);
   
   stroke (0)
-  point (255, 175)
-  point (262, 165)
-  point (265, 155)
-  point (266, 145)
+  point (257, 176)
+  point (264, 167)
+  point (267, 157)
+  point (267, 147)
   
   stroke (5)
   noFill ()
