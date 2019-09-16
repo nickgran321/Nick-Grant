@@ -1,6 +1,5 @@
 let movingcircle1;
 let movingcircle2;
-let movingcircle3;
 
 function setup() {
   createCanvas(500, 500);
