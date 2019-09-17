@@ -42,6 +42,6 @@ function draw() {
   stroke (0);
   fill(c);
   ellipse (spot.x, spot.y, height/20, width/20);
-  //circles appear when clicked. How can I slow down the circles?
+  //black circles appear when clicked. How can I slow down the circles?
   }
 }
