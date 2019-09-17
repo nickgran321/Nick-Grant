@@ -1,19 +1,21 @@
 let movingcircle1;
 let movingcircle2;
+var spot = {
+  x: 500,
+  y: 500,
+}
 
 function setup() {
   createCanvas(500, 500);
   movingcircle1 = random(width);
   movingcircle2 = random(height);
-  //Why do the circles only move randomly in a diagonal direction?
 }
-  //Is there a difference in assigning a random width and a random   height? I noticed that there might not be.
 
 function draw() {
   let r = random(255)
   let b = random(255)
   let g = random(255)
-  //Random colors
+  //colors
   
   fill(r, b, g, 200);
   background(movingcircle1, mouseX, mouseY);
@@ -25,15 +27,19 @@ function draw() {
   noStroke(0);
   ellipse(frameCount, height/2, width/2, 0+(frameCount));
   //moving circle across the screen
-  //What is the unit of measurement for 0+?
   
   rect(mouseX, mouseY, height/10, width/10);
   //rectangle follows mouse
-  //Is there a better way to remove numeric values from the height and the width?
   
   if (mouseIsPressed) {
     stroke(width)
     ellipse(frameCount, height/2, width/10, 0+(frameCount));
   //hidden circle
+    
+  spot.x = random(0, width);
+  spot.y = random(0, height);
+  stroke (0);
+  ellipse (spot.x, spot.y, height/20, width/20);
+  //circles appear when clicked. How can I slow down the circles?
   }
 }
