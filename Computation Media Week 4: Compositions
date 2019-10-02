@@ -1,0 +1,99 @@
+function setup() {
+	createCanvas(400, 400);
+    noLoop();
+}
+
+function draw(){ 
+	background(135, 206, 235);
+    //light blue background
+ 
+    r = random(255);
+    g = random(255);
+    b = random(255);
+    r2 = random(255);
+    g2 = random(255);
+    b2 = random(255);
+    r3 = random(255);
+    g3 = random(255); 
+    b3 = random(255);
+    //color variables
+  
+    push();
+    fill(165,42,42);
+    rect (195, 150, 30, 200);  
+    pop();
+    //bottom of the sign post
+  
+    push();
+    fill(165,42,42);
+    rect (122, 60, 180, 100);  
+    pop();
+    //brown sign post
+  
+    push();
+    fill(255);
+    rect (132, 70, 160, 80);  
+    pop();
+    //white sign post
+  
+    push();
+    fill(194, 178, 128);
+    rect (-100, 300, 500, 120);  
+    pop();
+    //sand
+
+  textSize(15);
+  text('Rare colorful seashells', 136, 90);
+  text('for sale at the beach!', 140, 110);
+  fill(0, 128, 0);
+  textSize(30);
+  text('$5 each', 155, 140);
+  // text(s, 50, 10, 60, 1000); 
+  
+  fill (181,101,29);
+  for(y=315;y<=height;y=y+15){ 
+      noStroke(); 
+    for(x=-510;x<=height;x=x+30)
+    rect(x,y,10,1);
+  }
+  //sand particles
+  
+    push();
+	stroke(10);
+    translate(width/5, height/1.5);
+	for (var i=0; i <200; i++) {
+		push();
+		rotate(i / 7);
+		scale(i / 1500);
+      	fill(r, g, b);
+		rect(0, 10, 80, 500);
+		pop(); 
+    }
+  //first seashell
+  
+    push();
+	stroke(10);
+    translate(width/1.75, height/12);
+	for (var i=0; i <200; i++) {
+		push();
+		rotate(i / 6);
+		scale(i / 1700);
+        fill (r2, g2, b2);
+		rect(0, 10, 80, 500);
+		pop(); 
+    }
+  //second seashell
+
+  push();
+	stroke(10);
+    translate(width/-3, height/12);
+	for (var i=0; i <110; i++) {
+		push();
+		rotate(i / 6);
+		scale(i / 1000);
+        fill (r3, g3, b3);
+		rect(0, 10, 80, 500);
+		pop(); 
+  //third seashell
+  }
+}
