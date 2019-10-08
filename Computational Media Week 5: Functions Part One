@@ -1,4 +1,4 @@
-function makeCat(x, y){
+function makeCat(){
   
   fill (250, 100, 0);
   triangle (50, 95, 55, 50, 80, 75);
@@ -58,7 +58,7 @@ function makeCat(x, y){
 }
 
 function setup() {
-  createCanvas(1000, 1000);
+  createCanvas(600, 500);
   noLoop();
 }
 
@@ -68,7 +68,7 @@ function draw() {
     push();
     translate(random(width), random(height));
     rotate(random(PI));
-    scale(random(.5), random(.5));
+    scale(random(0.5), random(0.5));
     makeCat();
     pop();
 }
