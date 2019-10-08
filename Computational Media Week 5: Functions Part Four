@@ -1,0 +1,32 @@
+function setup() {
+  createCanvas(642, 450);
+  }
+
+function draw() {
+  
+  background(210, 250, 220);
+  
+  forLoop(theText, "LIVE", 15, 40, 200, 120, 255);
+  forLoop(theText, "TIME", 11, 70, 255, 120, 120);
+  forLoop(theText, "GOD", 14, 100, 220, 220, 0);
+  forLoop(theText, "WAR", 13, 130, 200, 120, 255);
+  forLoop(theText, "LIVED", 3, 160, 120, 220, 0);
+  // forLoop(theText, "LIVED", 3, 150, 200, 120, 255);
+  // forLoop(theText, "LIVED", 7, 150, 255, 120, 120);
+  forLoop(theText, "EVIL", 16, 190, 200, 120, 255);
+  forLoop(theText, "EMIT", 11, 220, 255, 120, 120);
+  forLoop(theText, "DOG", 14, 250, 220, 220, 0);
+  forLoop(theText, "RAW", 13, 280, 200, 120, 255);
+  }
+
+  function theText (textArgument, x_position, y_position, r_color, g_color, b_color){
+    fill(r_color, g_color, b_color);
+    textSize(40);
+    text(textArgument, x_position, y_position);
+  }
+    
+    function forLoop(repeatingLetters, lettersContinue, x_pos, y_pos, r_color, g_color, b_color) {
+      for (let i = 0; i < width; i++){
+      repeatingLetters(lettersContinue, x_pos+i*130, y_pos+i*40, r_color, g_color, b_color);
+  }
+}
