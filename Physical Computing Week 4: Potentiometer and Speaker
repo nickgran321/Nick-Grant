@@ -1,0 +1,16 @@
+void setup() {
+  Serial.begin(9600);
+  pinMode(9, OUTPUT);
+
+}
+
+void loop() {
+  int reading = analogRead(A0);
+  int freq = map(reading, 0, 1023, 50, 2000);
+
+  tone(9, freq);
+  delay(20);
+  //milliseconds
+  noTone(9);
+
+}
