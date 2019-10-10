@@ -1,0 +1,22 @@
+void setup() {
+  Serial.begin(9600);
+  pinMode(12, INPUT);    // set the pushbutton pin to be an input
+  pinMode(11, OUTPUT);   // set the yellow LED pin to be an output
+  pinMode(10, OUTPUT);   // set the red LED pin to be an output
+
+}
+
+void loop() {
+int reading = digitalRead(12);
+  Serial.println(reading);
+
+if (digitalRead(12) == HIGH) {
+
+  digitalWrite(11, HIGH);
+  digitalWrite(10, LOW);
+}
+else {
+  digitalWrite(11, LOW);
+  digitalWrite(10, HIGH);
+}
+}
