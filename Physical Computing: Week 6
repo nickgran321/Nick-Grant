@@ -1,0 +1,48 @@
+boolean pressed = false;
+boolean ledon = false;
+
+void setup() {
+  Serial.begin(9600);
+  pinMode(2, INPUT);
+  pinMode(3, OUTPUT);
+
+}
+
+void loop() {
+  int reading = digitalRead(2); //realtime current state of button
+  Serial.println(reading);
+
+
+
+
+///////button detection
+  if (reading == 1) {
+    if (pressed == false) {
+      //first press down
+      pressed = true; //change previous state to indicate already pressed
+      delay(1);
+    }
+
+  if (pressed == true) {
+   //do nothing
+   }
+  }
+  
+  if (reading == 0) { //not actively pressed
+    if (pressed == true) {
+      //moment where I let go of the button
+      Serial.println("HEY LOOK A BUTTON PRESS");
+      ledon = !ledon;
+      pressed = false;
+    }
+    if (pressed == false) {
+      delay(1);
+    }
+    
+   }
+   if (ledon) {
+  digitalWrite(3, HIGH);
+  }else {
+   digitalWrite(3, LOW);
+  }
+ }
