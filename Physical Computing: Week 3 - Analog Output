@@ -1,0 +1,25 @@
+const int ledPin = 9; //pin LED is attached to
+const int ledPin2 = 8;
+const int ledPin3 = 7;
+const int ledPin4 = 6;
+  int analogValue = 0; //value read from the pot
+  int brightness = 0; //PWM pin that the LED is on
+
+void setup() {
+  Serial.begin(9600);
+  pinMode(ledPin, OUTPUT);
+  pinMode(ledPin2, OUTPUT);
+  pinMode(ledPin3, OUTPUT);
+  pinMode(ledPin4, OUTPUT);
+}
+
+void loop() {
+  analogValue = analogRead(A0);
+  brightness = analogValue /4;
+  analogWrite(ledPin, brightness);
+  analogWrite(ledPin2, brightness);
+  analogWrite(ledPin3, brightness);
+  analogWrite(ledPin4, brightness);
+  Serial.println(brightness);
+
+}
