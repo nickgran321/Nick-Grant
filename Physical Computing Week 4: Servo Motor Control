@@ -1,0 +1,21 @@
+#include <Servo.h>
+
+Servo myservo;
+int servoPin = 0;
+int servoMotor = 0;
+int servoAngle = 0;
+
+void setup() {
+  Serial.begin(9600);
+  myservo.attach(9);
+  //pinMode(9, OUTPUT);
+
+}
+
+void loop() {
+  int reading = analogRead(A0);
+  int angle = map(reading, 0, 1023, 0, 179);
+
+  myservo.write(angle);
+  delay(15);
+  }
