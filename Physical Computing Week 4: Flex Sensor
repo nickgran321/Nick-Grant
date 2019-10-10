@@ -1,0 +1,26 @@
+void setup() {
+  Serial.begin(9600);
+  pinMode(9, OUTPUT);
+
+  //Flex sensor example
+
+}
+
+void loop() {
+  int reading = analogRead(A1);
+
+  //inputs range - 0-1023
+  //outputs range 0-255
+
+int brightness = map(reading, 0, 1023, 0, 255);
+//int brightness = 255;
+
+  analogWrite(9, brightness);
+  //can change brightness. 127 is half bright
+
+//  Serial.print("pot: ");
+//  Serial.println(reading);
+  Serial.print(" mapped value: ");
+  Serial.println(brightness);
+  
+}
