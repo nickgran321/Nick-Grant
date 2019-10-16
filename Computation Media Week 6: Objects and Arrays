@@ -23,7 +23,7 @@ function preload() {
 }
 
 function setup() {
-  createCanvas(700, 560);
+  createCanvas(700, 568);
   song.loop()
   for (let i = 0; i < width; i++) {
     let x = random(width);
@@ -31,8 +31,9 @@ function setup() {
     let r = 100;
     let b = new eyeball(x, y, r);
     movingEye.push(b);
-    //data points for the moving eyes
   }
+// data points for the moving eyes  
+  
   colors = [color(0, 0, 255),
               color(135, 206, 250),
             color(0),
@@ -60,7 +61,7 @@ function setup() {
       protect.y = 100 + row * 104;
       protect.c = colors[row*4 + column];
       protections.push(protect);
-//grid system for the protections
+// grid system for the protections
     }
   }
 
@@ -138,10 +139,10 @@ push();
 push();
   stroke(0);
   strokeWeight(2); 
-  x = 1;
+  x = 1.2;
   while (x < width) {
-  line(x, 70, x, height - 78);
-  x = x + 174.5;
+  line(x, 68, x, height - 85);
+  x = x + 174.3;
   }
   pop();
 //horizontal grid lines
@@ -149,10 +150,10 @@ push();
   push();
   stroke(0);
   strokeWeight(2);
-  y = 68;
+  y = 66;
   while (y < width){
   line(0, y, width, y);
-  y = y + 104;
+  y = y + 104.5;
   }
   pop();
   pop();
@@ -188,7 +189,7 @@ push();
   displaytheHand();
   pop();
     }
-//displays the moving hands
+// displays the moving hands
   
   for (let i = 0; i < movingEye.length; i++) {
     if (movingEye[i].contains(mouseX, mouseY)) {
@@ -196,9 +197,9 @@ push();
     movingEye[i].move();
     movingEye[i].show();    
   }
-//checks to see if the mouse is over the moving eyes
+// checks to see if the mouse is over the moving eyes
 }
-//end of draw
+// end of draw
 
 class eyeball {
   constructor(x, y, r) {
