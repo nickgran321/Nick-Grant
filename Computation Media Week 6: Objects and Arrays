@@ -1,0 +1,263 @@
+let movingEye = [];
+let protections = [];
+let colors = []; 
+//arrays for the moving eyes and protections
+
+var radius = 50;
+//radius that detects whether hand is hovering over protection
+
+let handF = 5;
+let handRotation = [
+  0.04,
+  -0.04,
+  0.04,
+  -0.04,
+  0.04,
+  -0.04,
+];
+//array and variable for the moving hands
+
+function preload() {
+  song = loadSound("Music_File.mp3");
+  hand = loadImage("Evil_Eye_Hand.png")
+}
+
+function setup() {
+  createCanvas(700, 560);
+  song.loop()
+  for (let i = 0; i < width; i++) {
+    let x = random(width);
+    let y = random(height);
+    let r = 100;
+    let b = new eyeball(x, y, r);
+    movingEye.push(b);
+    //data points for the moving eyes
+  }
+  colors = [color(0, 0, 255),
+              color(135, 206, 250),
+            color(0),
+              color(139, 69, 13),
+            color(34, 139, 34),
+              color(50, 205, 50),
+            color(255, 165, 0),
+              color(255, 192, 203),
+            color(98, 46, 128),
+              color(255, 0, 0),
+            color(182, 85, 154),
+              color(255),
+            color(255, 255, 0),
+              color(150),
+            color(218, 165, 32),
+              color(50, 115, 115),
+          ]
+//colors for the protections
+  
+  for (let row = 0; row < 4; row++) {
+    for (let column = 0; column < 4; column++) {
+      let protect = new Protection();
+      protect.x = 89 + column * 175;
+      protect.r = 50;
+      protect.y = 100 + row * 104;
+      protect.c = colors[row*4 + column];
+      protections.push(protect);
+//grid system for the protections
+    }
+  }
+
+
+}
+
+function mousePressed() {
+  for (let i = movingEye.length - 1; i >= 0; i--) {
+    if (movingEye[i].contains(mouseX, mouseY)) {
+      movingEye.splice(i, 3);
+    }
+  }
+}
+//removes three moving eyes each time the mouse is clicked
+
+function draw() { 
+ 
+  push();
+  translate(0, 20);
+  
+  push();
+  fill(50, 115, 115);
+  rect(0, 56, 700, 417);
+  pop();
+//rectangular background  
+  
+  for (let i = 0; i < protections.length; i++) {
+  protections[i].update();
+   }
+//checks the color for the array of protections 
+  
+  push();
+  fill(0);
+  stroke(0);
+  strokeWeight(4);
+  fill(255);
+  textSize(40);
+  textFont("Comic Sans MS");
+  text("What protection do you seek?", 65, 34);
+  text("Hover to find your color.", 118, 518);
+  pop();
+// words on top and bottom of screen 
+  
+  push();
+  translate(0, -6.5);
+  
+  push();
+  noStroke();
+  fill(255);
+  textSize(0);
+  textFont("Comic Sans MS");
+  text("Karma Protection", 42, 156);
+  text("General Protection", 217, 156);
+  text("Power Protection", 392, 156);
+  text("Elements Protection", 560, 156);
+  text("Happiness Protection", 33, 262);
+  text("Success Protection", 214, 262);
+  text("Relaxation Protection", 380, 262);
+  text("Friendship Protection", 558, 262);
+  text("Imagination Protection", 30, 364);
+  text("Courage Protection", 210, 364);
+  text("True Love Protection", 380, 364);
+  text("Purity Protection", 562, 364);
+  text("Health Protection", 42, 468);
+  text("Security Protection", 211, 468);
+  text("Wealth Protection", 386, 468);
+  text("Clarity Protection", 562, 468);
+  pop();
+// titles of the protection  
+  
+  pop();
+  
+push();
+  translate(0, -11);
+push();
+  stroke(0);
+  strokeWeight(2); 
+  x = 1;
+  while (x < width) {
+  line(x, 70, x, height - 78);
+  x = x + 174.5;
+  }
+  pop();
+//horizontal grid lines
+  
+  push();
+  stroke(0);
+  strokeWeight(2);
+  y = 68;
+  while (y < width){
+  line(0, y, width, y);
+  y = y + 104;
+  }
+  pop();
+  pop();
+//vertical grid lines  
+
+  push();  
+  fill(255); 
+  for (x = 89; x < width; x = x + 175){
+  for (y = 101; y < 500; y = y + 104)
+    ellipse(x, y, 24, 24);   
+  }
+  pop(); 
+//outer white eyes  
+  
+  push();
+  fill(0);
+  for (x = 89; x < width; x = x + 175){
+  for (y = 101; y < 500; y = y + 104)
+    ellipse(x, y, 6, 6);
+  }
+  pop(); 
+// pupils    
+  
+  
+  pop();
+  
+ for (let i = 0; i < width * 2; i++) {
+  push();
+  translate(
+  (width/(2*handF)) + i * (width/handF), height*0.48);
+  rotate(frameCount * handRotation[i]);
+  scale(handF*0.05);
+  displaytheHand();
+  pop();
+    }
+//displays the moving hands
+  
+  for (let i = 0; i < movingEye.length; i++) {
+    if (movingEye[i].contains(mouseX, mouseY)) {
+    }
+    movingEye[i].move();
+    movingEye[i].show();    
+  }
+//checks to see if the mouse is over the moving eyes
+}
+//end of draw
+
+class eyeball {
+  constructor(x, y, r) {
+    this.x = x;
+    this.y = y;
+    this.r = r;
+  }
+
+  contains(parameterone, parametertwo) {
+    let d = dist(parameterone, parametertwo, this.x, this.y);
+    if (d < this.r) {
+      return true;
+    } else {
+      return false;
+    }
+  }
+
+  move() {
+    this.x = this.x + random(-5, 5);
+    this.y = this.y + random(-5, 5);
+  }
+
+  show() {
+    stroke(0);
+    strokeWeight(3);
+    fill(random(255), random(255), random(255));
+    ellipse(this.x, this.y, this.r * 2);
+    fill(255);
+    ellipse(this.x, this. y, this.r * 0.8);
+    fill(0);
+    ellipse(this.x, this. y, this.r * 0.4);
+  }
+}
+
+class Protection {
+  constructor(x, y, r, c) {
+    this.x = x;
+    this.y = y;
+    this.r = r;
+    this.c = c;
+  }
+
+  display(col) {
+    fill(col);
+    ellipse(this.x, this.y, this.r);
+  }
+
+  update(){
+    var d = dist(mouseX, mouseY, this.x, this.y + 21);
+    if (d < radius / 1.9) {
+     this.display(this.c);
+    } else {
+      //create random color
+      this.display(color(random(255), random(255), random(255)));
+      // display with that color
+    }         
+  }
+}
+
+function displaytheHand() {
+  image(hand, 5, 5);
+}
