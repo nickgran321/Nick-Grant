@@ -1,0 +1,145 @@
+let capture;
+let cap;
+let playing = true;
+
+let rSlider, gSlider, bSlider;
+
+function setup() {
+  createCanvas(500, 500);
+  capture = createCapture(VIDEO);
+  capture.hide();
+  noStroke();
+  frameRate(10);
+//
+  cap = createCapture(VIDEO);
+  cap.hide();
+  cap.position(0,0);
+  cap.loop();
+  
+  createP("Double-click to take a picture");
+  // colorMode(HSB, 255); 
+  song.loop()
+  
+  push();
+  stroke(5);
+  rSlider = createSlider(0, 127.5, 0);
+  rSlider.position(58, 425);
+  rSlider.id('red');
+  //rSlider.style(
+  gSlider = createSlider(0, 127.5, 0);
+  gSlider.position(58, 455);
+  gSlider.id('green');
+  bSlider = createSlider(0, 127.5, 0);
+  bSlider.position(58, 485);
+  bSlider.id('blue');
+  pop();
+  
+}
+
+function preload() {
+ song = loadSound("Music.mp3"); 
+}
+
+function draw() {
+ 
+  image(capture, 0, 0);
+  
+  let img = cap.get();
+  image(img, 0, 0);
+  
+  capture.loadPixels();
+  
+  let r = rSlider.value();
+  let g = gSlider.value();
+  let b = bSlider.value();
+  // image(r, g, b);
+  
+  for(let xx = 0; xx*20 < width; xx++) {
+    for(let yy = 0; yy*30 < height; yy++) {
+    let pixelColor = get(xx*10, yy*10);
+     // console.log(get(xx*10,0));
+    // push()
+    // fill(pixelColor[0]+random(200, -200),pixelColor[1]+random(20),pixelColor[2]+random(20));
+    // rect(xx*10,yy*10,10,10);
+    // pop()
+
+    push();          
+    fill(pixelColor[0]/2 + r,pixelColor[1] + g,pixelColor[2]*5 + b); 
+    translate(300, 200);
+    rect(xx*10,yy*10,20,10);
+    pop();
+      //second to last square on the right
+      
+      
+    push();
+    fill(pixelColor[0]/2 + r,pixelColor[1]+10 + g,pixelColor[2]+random(10) + b);
+    translate(250, -3);
+    rect(xx*10/2,yy*7.1,10,10);
+    pop();
+      //first square
+      
+    push();
+    fill(pixelColor[0] + r,pixelColor[1]+random(100) + g,pixelColor[2]/3 + b);
+    translate(350, 0);
+    rect(xx*10,yy*8,10,10);
+    pop();
+      //second square
+      
+    push();
+    fill(pixelColor[0]+random(100, 100) + r,pixelColor[1]/2 + g,pixelColor[2]+random(100) + b);
+    translate(250, 290);
+    rect(xx*10/2,yy*10/2,10,10);
+    pop();
+      //small square in third row
+      
+    push();
+    fill(pixelColor[0]+random(25, -25) + r,pixelColor[1] + g,pixelColor[2]+random(100,100) + b);
+    translate(250, 120);
+    rect(xx*10,yy*10,10,10);
+    pop();
+      //large square in second row
+      
+    push();
+    fill(pixelColor[0]+random(150,150) + r,pixelColor[1]-10 + g,pixelColor[2] + b);
+    translate(250, 358);
+    rect(xx*10,yy*7,10,10);
+    pop();
+      //bottom square
+  
+    push();
+    fill(pixelColor[0] + r,pixelColor[1] + g,pixelColor[2] + b);
+    scale(.5);
+    translate(700, 150);
+    rect(xx*5,yy*5,10,10);
+    pop();
+      //small square
+    
+    push();
+    fill(pixelColor[0]/15,pixelColor[1]/15,pixelColor[2]/15);
+    translate(0, 310);
+    rect(xx*10,yy*10,10,10);
+    pop();
+      //black square
+      
+    push();
+    fill(pixelColor[0]/15,pixelColor[1]/15,pixelColor[2]/15);
+    translate(0, 240);
+    rect(xx*10,yy*10,10,10);
+    pop();
+      //black square
+    
+     
+    }
+  }
+}
+
+
+function doubleClicked() {
+  if (playing) {
+   cap.pause(); 
+  }
+  else {
+    cap.play();
+  }
+  playing = !playing;
+}
