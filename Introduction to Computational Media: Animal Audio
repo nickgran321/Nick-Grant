@@ -197,6 +197,8 @@ function batsImage() {
   endMusic();
   pigeonsSound.setVolume(0.0);
   batsSound.loop();
+   
+  resetSketch();
 
   strokeWeight(4);
   stroke(255);
@@ -347,4 +349,13 @@ function allSounds() {
   snakesSound.loop();
   pigeonsSound.loop();
   batsSound.loop();
+}
+
+function resetSketch() {
+  reset = createButton("Reset");
+  reset.style('font-size', '50px');
+  reset.style('background-color', '#000000');
+  reset.style('color', '#ffffff');
+  reset.position(0, height);
+  reset.mousePressed(beginScreen);
 }
