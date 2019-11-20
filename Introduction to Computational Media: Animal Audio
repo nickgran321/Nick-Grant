@@ -1,0 +1,350 @@
+var birds;
+var pigeons;
+var bats;
+var reptiles;
+var snakes;
+var frogs;
+var insects;
+var crickets;
+var cicadas;
+var aquatics;
+var dolphins;
+var whales;
+//animals
+
+var pigeonsSound;
+var batsSound;
+var snakesSound;
+var frogsSound;
+var cricketsSound;
+var cicadasSound;
+var dolphinsSound;
+var whalesSound;
+//sounds
+
+function preload() {
+  pigeonsSound = loadSound("pigeons.mp3");
+  batsSound = loadSound("bats.mp3");
+  snakesSound = loadSound("snakes.mp3");
+  frogsSound = loadSound("frogs.mp3");
+  cricketsSound = loadSound("crickets.mp3");
+  cicadasSound = loadSound("cicadas.mp3");
+  dolphinsSound = loadSound("dolphins.mp3");
+  whalesSound = loadSound("whales.mp3");
+}
+
+function setup() {
+  createCanvas(700, 600);
+  frogsPic = loadImage("frogs.jpg");
+  snakesPic = loadImage("snakes.jpg");
+  cricketPic = loadImage("cricket.jpg");
+  cicadaPic = loadImage("cicada.jpg");
+  dolphinPic = loadImage("dolphin.jpg");
+  whalePic = loadImage("whale.jpg");
+  pigeonPic = loadImage("pigeon.jpg");
+  batsPic = loadImage("bats.jpg");
+
+  beginScreen();
+}
+
+function beginScreen() {
+  background(255, 150, 0);
+
+  removeElements();
+  allSounds();
+
+  fill(0);
+  textSize(30);
+  stroke(255);
+  strokeWeight(3);
+  textFont("Garamond");
+  textAlign(CENTER);
+  text("Animal sound fun facts! Click to learn more.", width / 2, 50);
+
+  birds = createButton("Birds");
+  birds.style('font-size', '40px');
+  birds.style('background-color', '#800080');
+  birds.style('color', '#FF00FF');
+  birds.position(80, height / 3);
+  birds.mousePressed(birdsFacts);
+  //birds button
+
+  reptiles = createButton("Reptiles");
+  reptiles.style('font-size', '40px');
+  reptiles.style('background-color', '#6E0000');
+  reptiles.style('color', '#FF0000');
+  reptiles.position(460, height / 3);
+  reptiles.mousePressed(reptilesFacts);
+  //retiles button
+
+  insects = createButton("Insects");
+  insects.style('font-size', '40px');
+  insects.style('background-color', '#006400');
+  insects.style('color', '#00FF00');
+  insects.position(63, height / 1.5);
+  insects.mousePressed(insectsFacts);
+  //insects button
+
+  aquatics = createButton("Aquatics");
+  aquatics.style('font-size', '40px');
+  aquatics.style('background-color', '#0000C8');
+  aquatics.style('color', '#00FFFF');
+  aquatics.position(452, height / 1.5);
+  aquatics.mousePressed(aquaticsFacts);
+  //aquatics button
+}
+
+function birdsFacts() {
+  removeElements();
+
+  endMusic();
+  pigeonsSound.loop();
+  batsSound.loop();
+
+  bats = createButton("Bats");
+  bats.style('font-size', '60px');
+  bats.style('background-color', '#800080');
+  bats.style('color', '#FF00FF');
+  bats.position(60, height / 2.3);
+  bats.mousePressed(batsImage);
+  //bats button
+
+  pigeons = createButton("Pigeons");
+  pigeons.style('font-size', '60px');
+  pigeons.style('background-color', '#800080');
+  pigeons.style('color', '#FF00FF');
+  pigeons.position(420, height / 2.3);
+  pigeons.mousePressed(pigeonsImage);
+  //pigeons button
+}
+
+function reptilesFacts() {
+  removeElements();
+
+  endMusic();
+  frogsSound.loop();
+  snakesSound.loop();
+
+  snakes = createButton("Snakes");
+  snakes.style('font-size', '60px');
+  snakes.style('background-color', '#6E0000');
+  snakes.style('color', '#FF0000');
+  snakes.position(60, height / 2.3);
+  snakes.mousePressed(snakesImage);
+  //snakes button
+
+  frogs = createButton("Frogs");
+  frogs.style('font-size', '60px');
+  frogs.style('background-color', '#6E0000');
+  frogs.style('color', '#FF0000');
+  frogs.position(480, height / 2.3);
+  frogs.mousePressed(frogsImage);
+  //frogs button
+}
+
+function insectsFacts() {
+  removeElements();
+
+  endMusic();
+  cicadasSound.loop();
+  cricketsSound.loop();
+
+  crickets = createButton("Crickets");
+  crickets.style('font-size', '60px');
+  crickets.style('background-color', '#006400');
+  crickets.style('color', '#00FF00');
+  crickets.position(60, height / 2.3);
+  crickets.mousePressed(cricketsImage);
+  //crickets button
+
+  cicadas = createButton("Cicadas");
+  cicadas.style('font-size', '60px');
+  cicadas.style('background-color', '#006400');
+  cicadas.style('color', '#00FF00');
+  cicadas.position(420, height / 2.3);
+  cicadas.mousePressed(cicadasImage);
+  //cicadas button
+}
+
+function aquaticsFacts() {
+  removeElements();
+
+  endMusic();
+  dolphinsSound.loop();
+  whalesSound.loop();
+
+  dolphins = createButton("Dolphins");
+  dolphins.style('font-size', '60px');
+  dolphins.style('background-color', '#0000C8');
+  dolphins.style('color', '#00FFFF');
+  dolphins.position(60, height / 2.3);
+  dolphins.mousePressed(dolphinsImage)
+  //dolphins button
+
+  whales = createButton("Whales");
+  whales.style('font-size', '60px');
+  whales.style('background-color', '#0000C8');
+  whales.style('color', '#00FFFF');
+  whales.position(440, height / 2.3);
+  whales.mousePressed(whalesImage)
+  //whales button
+}
+
+function batsImage() {
+  removeElements();
+  image(batsPic, 0, 0, width, height);
+
+  endMusic();
+  pigeonsSound.setVolume(0.0);
+  batsSound.loop();
+
+  strokeWeight(4);
+  stroke(255);
+  textSize(30);
+  textFont("Garamond");
+  fill(0);
+  textAlign(CENTER);
+  text("Bats make loud cries that are too high pitched for the human ear. Sound waves from these cries bounce off every object and echo back, which is how bats locate everything around them", width / 3.5, height / 3.5, 300, 300);
+  //bats image and sound
+}
+
+function pigeonsImage() {
+  removeElements();
+  image(pigeonPic, 0, 0, width, height);
+
+  endMusic();
+  batsSound.setVolume(0.0);
+  pigeonsSound.loop();
+
+  strokeWeight(4);
+  stroke(255);
+  textSize(30);
+  textFont("Garamond");
+  fill(0);
+  textAlign(CENTER);
+  text("Pigeons have the ability to hear frequencies as low as 0.5 hertz (Hz), allowing them to hear sounds that are far away like storms, and also helps them navigate long distances", width / 3.5, height / 3.5, 300, 300);
+}
+
+function snakesImage() {
+  removeElements();
+  image(snakesPic, 0, 0, width, height);
+  
+  endMusic();
+  frogsSound.setVolume(0.0);
+  snakesSound.loop();
+
+  strokeWeight(4);
+  stroke(255);
+  textSize(30);
+  textFont("Garamond");
+  fill(0);
+  textAlign(CENTER);
+  text("Snakes do not have ears, but “hear” vibrations through their skin that is touching the ground", width / 3.5, height / 3.5, 300, 300);
+}
+
+function frogsImage() {
+  removeElements();
+  image(frogsPic, 0, 0, width, height);
+ 
+  endMusic();
+  snakesSound.setVolume(0.0);
+  frogsSound.loop();
+
+  strokeWeight(4);
+  stroke(255);
+  textSize(30);
+  textFont("Garamond");
+  fill(0);
+  textAlign(CENTER);
+  text("Frogs have an ear drum and an inner ear. They hear with these structures as well as one more — their lungs! In this way, frogs can receive sound from the air and water", width / 3.5, height / 3.5, 300, 300);
+}
+
+function cricketsImage() {
+  removeElements();
+  image(cricketPic, 0, 0, width, height);
+
+  endMusic();
+  cicadasSound.setVolume(0.0);
+  cricketsSound.loop();
+
+  strokeWeight(4);
+  stroke(255);
+  textSize(30);
+  textFont("Garamond");
+  fill(0);
+  textAlign(CENTER);
+  text("Crickets have their hearing organs in their knees", width / 3.5, height / 3.5, 300, 300);
+}
+
+function cicadasImage() {
+  removeElements();
+  image(cicadaPic, 0, 0, width, height);
+  
+  endMusic();
+  cricketsSound.setVolume(0.0);
+  cicadasSound.loop();
+
+  strokeWeight(4);
+  stroke(255);
+  textSize(30);
+  textFont("Garamond");
+  fill(0);
+  textAlign(CENTER);
+  text("Cicadas have their hearing organs in their stomachs", width / 3.5, height / 3.5, 300, 300);
+}
+
+function dolphinsImage() {
+  removeElements();
+  image(dolphinPic, 0, 0, width, height);
+  
+  endMusic();
+  whalesSound.setVolume(0.0);
+  dolphinsSound.loop();
+
+  strokeWeight(4);
+  stroke(255);
+  textSize(30);
+  textFont("Garamond");
+  fill(0);
+  textAlign(CENTER);
+  text("Dolphins are capable of hearing sounds underwater from as far as 15 miles away", width / 3.5, height / 3.5, 300, 300);
+}
+
+function whalesImage() {
+  removeElements();
+  image(whalePic, 0, 0, width, height);
+  
+  endMusic();
+  dolphinsSound.setVolume(0.0);
+  whalesSound.loop();
+
+  strokeWeight(3);
+  stroke(255);
+  textSize(30);
+  textFont("Garamond");
+  fill(0);
+  textAlign(CENTER);
+  text("Whale voices are able to travel a whopping 479 miles through the waters of the ocean. They have the ability to communicate with each other for long distances", width / 3.5, height / 3.5, 300, 300);
+}
+
+function endMusic() {
+  whalesSound.stop();
+  dolphinsSound.stop();
+  cicadasSound.stop();
+  cricketsSound.stop();
+  frogsSound.stop();
+  snakesSound.stop();
+  pigeonsSound.stop();
+  batsSound.stop();
+}
+
+function allSounds() {
+  whalesSound.loop();
+  dolphinsSound.loop();
+  cicadasSound.loop();
+  cricketsSound.loop();
+  frogsSound.loop();
+  snakesSound.loop();
+  pigeonsSound.loop();
+  batsSound.loop();
+}
