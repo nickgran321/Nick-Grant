@@ -1,0 +1,2078 @@
+var state = 0;
+let capture;
+let memories = [];
+let allLines;
+let everything;
+let words;
+let r;
+let g;
+let b;
+
+function preload() {
+  dejavu = createVideo("dejavu.mp4");
+  dejavu.hide();
+
+  crying = createVideo("crying.mp4");
+  crying.hide();
+
+  isolation = createVideo("isolation.mp4");
+  isolation.hide();
+
+  party = createVideo("party.mp4");
+  party.hide();
+
+  hospital = createVideo("hospital.mp4");
+  hospital.hide();
+
+  thinking = createVideo("thinking.mp4");
+  thinking.hide();
+
+  paint = createVideo("paint.mp4");
+  paint.hide();
+
+  tosleep = createVideo("tosleep.mp4");
+  tosleep.hide();
+
+  bed = createVideo("bed.mp4");
+  bed.hide();
+
+  blackhead = createVideo("blackhead.mp4");
+  blackhead.hide();
+
+  shower = createVideo("shower.mp4");
+  shower.hide();
+
+  hair = createVideo("hair.mp4");
+  hair.hide();
+
+  snickering = createVideo("snickering.mp4");
+  snickering.hide();
+
+  gradual = createVideo("gradual.mp4");
+  gradual.hide();
+
+  sink = createVideo("sink.mp4");
+  sink.hide();
+
+  bathtub = createVideo("bathtub.mp4");
+  bathtub.hide();
+
+  last = createVideo("last.mp4");
+  last.hide();
+
+  why = createVideo("why.mp4");
+  why.hide();
+
+  birthday = createVideo("birthday.mp4");
+  birthday.hide();
+
+  icecream = createVideo("icecream.mp4");
+  icecream.hide();
+
+  umbrella = createVideo("umbrella.mp4");
+  umbrella.hide();
+
+  candles = createVideo("candles.mp4");
+  candles.hide();
+
+  roundd = createVideo("round.mp4");
+  roundd.hide();
+
+  donkey = createVideo("donkey.mp4");
+  donkey.hide();
+
+  corn = createVideo("corn.mp4");
+  corn.hide();
+
+  wheat = createVideo("wheat.mp4");
+  wheat.hide();
+
+  beef = createVideo("beef.mp4");
+  beef.hide();
+
+  beet = createVideo("beet.mp4");
+  beet.hide();
+
+  calendar = createVideo("calendar.mp4")
+  calendar.hide();
+
+  microscopic = createVideo("microscopic.mp4");
+  microscopic.hide();
+
+  claustrophobic = createVideo("claustrophobic.mp4");
+  claustrophobic.hide();
+
+  breathing = createVideo("breathing.mp4");
+  breathing.hide();
+
+  capture = createCapture(VIDEO);
+  capture.size(500, 500);
+  capture.hide();
+
+  whitenoise = loadSound("whitenoise.mp3");
+  allLines = loadStrings('I_Remember.txt');
+}
+
+function setup() {
+  createCanvas(600, 600);
+  for (let i = 0; i < 1; i++) {
+  memories.push(new strand(random(width), random(height)));
+  }
+  everything = allLines.join(" ");
+  words = everything.split(" ");
+  frameRate(0.9);
+}
+
+function keyPressed() {
+  if (keyCode === RIGHT_ARROW) {
+    state++;
+  }
+  if (keyCode === RIGHT_ARROW) {
+    memories.push(new strand(random(width), random(height)));
+  }
+}
+
+function draw() {
+  if (state == 0) {
+    beginningState();
+  } else if (state == 1) {
+    toprightChange();
+  } else if (state == 2) {
+    bottomleftChange();
+  } else if (state == 3) {
+    webcam();
+  } else if (state == 4) {
+    dejavuStanza();
+  } else if (state == 5) {
+    cryingStanza();
+  } else if (state == 6) {
+    isolationStanza();
+  } else if (state == 7) {
+    partyStanza();
+  } else if (state == 8) {
+    hospitalStanza();
+  } else if (state == 9) {
+    thinkingStanza();
+  } else if (state == 10) {
+    paintStanza();
+  } else if (state == 11) {
+    tosleepStanza();
+  } else if (state == 12) {
+    bedStanza();
+  } else if (state == 13) {
+    blackheadStanza();
+  } else if (state == 14) {
+    showerStanza();
+  } else if (state == 15) {
+    hairStanza();
+  } else if (state == 16) {
+    snickeringStanza();
+  } else if (state == 17) {
+    gradualStanza();
+  } else if (state == 18) {
+    sinkStanza();
+  } else if (state == 19) {
+    bathtubStanza();
+  } else if (state == 20) {
+    lastStanza();
+  } else if (state == 21) {
+    whyStanza();
+  } else if (state == 22) {
+    birthdayStanza();
+  } else if (state == 23) {
+    icecreamStanza();
+  } else if (state == 24) {
+    umbrellaStanza();
+  } else if (state == 25) {
+    candlesStanza();
+  } else if (state == 26) {
+    roundStanza();
+  } else if (state == 27) {
+    donkeyStanza();
+  } else if (state == 28) {
+    cornStanza();
+  } else if (state == 29) {
+    wheatStanza();
+  } else if (state == 30) {
+    beefStanza();
+  } else if (state == 31) {
+    beetStanza();
+  } else if (state == 32) {
+    calendarStanza();
+  } else if (state == 33) {
+    microscopicStanza();
+  } else if (state == 34) {
+    claustrophobicStanza();
+  } else if (state == 35) {
+    breathingStanza();
+  } else if (state == 36) {
+    toprightgoneStanza();
+  } else if (state == 37) {
+    bottomleftgoneStanza();
+  } else if (state == 38) {
+    topleftgoneStanza();
+  } else if (state == 39) {
+    bottomrightgoneStanza();
+  } else if (state == 40) {
+    nothingStanza();
+  }
+  whitenoise.play();
+}
+
+function beginningState() {
+  beginningSquares();
+  whitenoise.setVolume(0.0);
+  movingLines();
+
+  stroke(0);
+  strokeWeight(2)
+  textFont("American Typewriter");
+  textSize(30);
+  fill(255);
+  rememberText();
+
+  text("visual memoir (pages 139-143)", 50, 480, 60);
+  //third square
+
+  textSize(14);
+  text("press right to continue", 410, 565);
+  //fourth square
+}
+
+function toprightChange() {
+  beginningSquares()
+  standardFont();
+  whitenoise.setVolume(0.0);
+
+  rememberText();
+
+  text("visual memoir (pages 139-143)", 50, 480, 60);
+
+  textSize(14);
+  text("press right to continue", 410, 565);
+
+  textAlign(CENTER);
+  textSize(16);
+  text("Joe Brainard was an American artist and writer. He was born on March 11, 1942, in Salem Arkansas, and spent his childhood in Tulsa, Oklahoma. At age 19, he moved to New York City where he joined a community of talented poets and painters.", 328, 68, 250, 300);
+  //second square change
+}
+
+function bottomleftChange() {
+  beginningSquares()
+  standardFont();
+  whitenoise.setVolume(0.0);
+
+  rememberText();
+
+  wellKnown();
+
+  textAlign(LEFT);
+  textSize(14);
+  text("press right to continue", 410, 565);
+
+  textAlign(CENTER);
+  textSize(16);
+  text("Joe Brainard was an American artist and writer. He was born on March 11, 1942, in Salem Arkansas, and spent his childhood in Tulsa, Oklahoma. At age 19, he moved to New York City where he joined a community of talented poets and painters.", 328, 68, 250, 300);
+  //second square change
+
+  memoriesFlow();
+}
+
+function webcam() {
+  beginningSquares();
+  standardFont();
+  whitenoise.setVolume(0.2);
+  webcamCapture();
+
+  rememberText();
+
+  wellKnown();
+
+  textAlign(LEFT);
+  textSize(14);
+  text("press right to continue", 410, 565);
+
+  textAlign(CENTER);
+  textSize(16);
+  text("Joe Brainard was an American artist and writer. He was born on March 11, 1942, in Salem Arkansas, and spent his childhood in Tulsa, Oklahoma. At age 19, he moved to New York City where he joined a community of talented poets and painters.", 328, 68, 250, 300);
+  //second square change
+  memoriesFlow();
+}
+
+function dejavuStanza() {
+  beginningSquares();
+
+  push();
+  tint(255, 255);
+  dejavuVideo();
+  pop();
+
+  standardFont();
+  webcamCapture();
+
+  wellKnown();
+
+  textAlign(LEFT);
+  textSize(14);
+  text("press right to continue", 410, 565);
+
+  textAlign(CENTER);
+  textSize(16);
+  text("Joe Brainard was an American artist and writer. He was born on March 11, 1942, in Salem Arkansas, and spent his childhood in Tulsa, Oklahoma. At age 19, he moved to New York City where he joined a community of talented poets and painters.", 328, 68, 250, 300);
+
+  textAlign(CENTER);
+  textSize(20);
+  text("I remember finding myself in situations I all of a sudden feel (remember) I’ve been in before: a ‘repeat’ life flash.", 25, 80, 250, 250);
+
+  memoriesFlow();
+}
+
+function cryingStanza() {
+  beginningSquares();
+  memoriesFlow();
+
+  tint(255, 255);
+  cryingVideo();
+  dejavuVideo();
+  dejavu.volume(0.3);
+
+  webcamCapture();
+
+  standardFont();
+
+  wellKnown();
+
+  textAlign(LEFT);
+  textSize(14);
+  text("press right to continue", 410, 565);
+
+  textAlign(CENTER);
+  textSize(20);
+  text("I remember finding myself in situations I all of a sudden feel (remember) I’ve been in before: a ‘repeat’ life flash.", 25, 80, 250, 250);
+
+  push();
+  textSize(20);
+  text("I remember those times of not knowing if you feel really happy or really sad. (Wet eyes and a high heart.)", 332, 80, 250, 250);
+  pop();
+}
+
+function isolationStanza() {
+  beginningSquares()
+  memoriesFlow();
+
+  tint(255, 255);
+
+  dejavuVideo();
+  dejavu.volume(0.3);
+  textAlign(CENTER);
+
+  cryingVideo();
+  crying.volume(0.3);
+
+  isolationVideo();
+
+  webcamCapture();
+
+  standardFont();
+
+  textAlign(LEFT);
+  textSize(14);
+  text("press right to continue", 410, 565);
+
+
+  textAlign(CENTER);
+  textSize(20);
+  text("I remember, in crowds - total isolation!", 27, 440, 250, 300);
+
+  textAlign(CENTER);
+  textSize(20);
+  text("I remember those times of not knowing if you feel really happy or really sad. (Wet eyes and a high heart.)", 332, 80, 250, 250);
+
+  textSize(20);
+  text("I remember finding myself in situations I all of a sudden feel (remember) I’ve been in before: a ‘repeat’ life flash.", 25, 80, 250, 250);
+
+  memoriesFlow();
+}
+
+function partyStanza() {
+  tint(255, 255);
+  dejavuVideo();
+  dejavu.volume(0.3);
+
+  cryingVideo();
+  crying.volume(0.3);
+
+  isolationVideo();
+  isolation.volume(0.3);
+
+  partyVideo();
+
+  webcamCapture();
+
+  standardFont();
+  text("I remember finding myself in situations I all of a sudden feel (remember) I’ve been in before: a ‘repeat’ life flash.", 25, 80, 250, 250);
+
+  text("I remember those times of not knowing if you feel really happy or really sad. (Wet eyes and a high heart.)", 332, 80, 250, 250);
+
+  text("I remember, in crowds - total isolation!", 27, 440, 250, 300);
+
+  text("I remember, at parties - naked!", 332, 440, 250, 300);
+
+  memoriesFlow();
+}
+
+function hospitalStanza() {
+
+  tint(255, 255);
+
+  cryingVideo();
+  crying.volume(0.3);
+
+  isolationVideo();
+  isolation.volume(0.3);
+
+  hospitalVideo();
+
+  partyVideo();
+  party.volume(0.3);
+
+  standardFont();
+
+  tint(255, 70);
+
+  dejavuVideo();
+  dejavu.volume(0.0);
+
+  webcamCapture();
+
+  text("I remember those times of not knowing if you feel really happy or really sad. (Wet eyes and a high heart.)", 332, 80, 250, 250);
+
+  text("I remember, in crowds - total isolation!", 27, 440, 250, 300);
+
+  text("I remember, at parties - naked!", 332, 440, 250, 300);
+
+  text("I remember body realizations about how fragile we (life) really are (is).", 25, 95, 250, 250);
+
+  memoriesFlow();
+}
+
+function thinkingStanza() {
+
+  tint(255, 255);
+
+  isolationVideo();
+  isolation.volume(0.3);
+
+  partyVideo();
+  party.volume(0.3);
+
+  thinkingVideo();
+
+  hospitalVideo();
+  hospital.volume(0.3);
+
+
+  standardFont();
+
+  tint(255, 70);
+
+  dejavuVideo();
+  dejavu.volume(0.0);
+
+  cryingVideo();
+  crying.volume(0.0);
+
+  webcamCapture();
+
+  text("I remember, in crowds - total isolation!", 27, 440, 250, 300);
+
+  text("I remember, at parties - naked!", 332, 440, 250, 300);
+
+  text("I remember body realizations about how fragile we (life) really are (is).", 25, 95, 250, 250);
+
+  text("I remember trying to figure things out – (life) – trying to get it all down to something basic – and ending up with nothing. Except a dizzy head.", 332, 80, 250, 250);
+
+  memoriesFlow();
+}
+
+function paintStanza() {
+
+  push();
+
+  tint(255, 255);
+
+  paintVideo();
+
+  partyVideo();
+  party.volume(0.3);
+
+  hospitalVideo();
+  hospital.volume(0.3);
+
+  thinkingVideo();
+  thinking.volume(0.3);
+
+  standardFont();
+
+  tint(255, 70);
+
+  dejavuVideo();
+  dejavu.volume(0.0);
+
+  cryingVideo();
+  crying.volume(0.0);
+
+  isolationVideo();
+  isolation.volume(0.0);
+
+  webcamCapture();
+
+  push();
+  textSize(16);
+  text("I remember having a long serious discussion with Ted Berrigan once about if a homosexual painter could paint the female nude as well as a “straight” painter could.", 27, 400, 250, 300);
+  pop();
+
+  text("I remember, at parties - naked!", 332, 440, 250, 300);
+
+  text("I remember body realizations about how fragile we (life) really are (is).", 25, 95, 250, 250);
+
+  text("I remember trying to figure things out – (life) – trying to get it all down to something basic – and ending up with nothing. Except a dizzy head.", 332, 80, 250, 250);
+  memoriesFlow();
+}
+
+function tosleepStanza() {
+
+  tint(255, 255);
+
+  paintVideo();
+  paint.volume(0.3);
+
+  tosleepVideo();
+
+  hospitalVideo();
+  hospital.volume(0.3);
+
+  standardFont();
+
+  thinkingVideo();
+  thinking.volume(0.3);
+
+  tint(255, 70);
+
+  dejavuVideo();
+  dejavu.volume(0.0);
+
+  cryingVideo();
+  crying.volume(0.0);
+
+  isolationVideo();
+  isolation.volume(0.0);
+
+  partyVideo();
+  party.volume(0.0);
+
+  webcamCapture();
+
+  push();
+  textSize(16);
+  text("I remember having a long serious discussion with Ted Berrigan once about if a homosexual painter could paint the female nude as well as a “straight” painter could.", 27, 400, 250, 300);
+  pop();
+
+  text("I remember “Now I lay me down to sleep (etc.)”", 332, 440, 250, 300);
+
+  text("I remember body realizations about how fragile we (life) really are (is).", 25, 95, 250, 250);
+
+  text("I remember trying to figure things out – (life) – trying to get it all down to something basic – and ending up with nothing. Except a dizzy head.", 332, 80, 250, 250);
+
+  memoriesFlow();
+}
+
+function bedStanza() {
+
+  tint(255, 255);
+  //current
+
+  bedVideo();
+
+  paintVideo();
+  paint.volume(0.3);
+
+  tosleepVideo();
+  tosleep.volume(0.3);
+
+  thinkingVideo();
+  thinking.volume(0.3);
+
+  tint(255, 70);
+  //underlying
+
+  hospitalVideo();
+  hospital.volume(0.0);
+
+  cryingVideo();
+  crying.volume(0.0);
+
+  isolationVideo();
+  isolation.volume(0.0);
+
+  partyVideo();
+  party.volume(0.0);
+
+  webcamCapture();
+
+  standardFont();
+
+  push();
+  textSize(16);
+  text("I remember having a long serious discussion with Ted Berrigan once about if a homosexual painter could paint the female nude as well as a “straight” painter could.", 27, 400, 250, 300);
+  pop();
+
+  text("I remember “Now I lay me down to sleep (etc.)”", 332, 440, 250, 300);
+
+  text("I remember, just out of bed in the morning, red wrinkle designs on your skin.", 25, 90, 250, 250);
+
+  text("I remember trying to figure things out – (life) – trying to get it all down to something basic – and ending up with nothing. Except a dizzy head.", 332, 80, 250, 250);
+  memoriesFlow();
+}
+
+function blackheadStanza() {
+  tint(255, 255);
+  //current
+
+  blackheadVideo();
+
+  bedVideo();
+  bed.volume(0.3);
+
+  paintVideo();
+  paint.volume(0.3);
+
+  tosleepVideo();
+  tosleep.volume(0.3);
+
+  tint(255, 70);
+  //underlying
+
+  thinkingVideo();
+  thinking.volume(0.0);
+
+  hospitalVideo();
+  hospital.volume(0.0);
+
+  isolationVideo();
+  isolation.volume(0.0);
+
+  partyVideo();
+  party.volume(0.0);
+
+  webcamCapture();
+
+  standardFont();
+
+  push();
+  textSize(16);
+  text("I remember having a long serious discussion with Ted Berrigan once about if a homosexual painter could paint the female nude as well as a “straight” painter could.", 27, 400, 250, 300);
+  pop();
+
+  text("I remember “Now I lay me down to sleep (etc.)”", 332, 440, 250, 300);
+
+  text("I remember, just out of bed in the morning, red wrinkle designs on your skin.", 25, 90, 250, 250);
+
+  text("I remember my mother cornering me into corners to squeeze out blackheads. (Hurt like hell).", 332, 80, 250, 250);
+
+  memoriesFlow();
+}
+
+function showerStanza() {
+  tint(255, 255);
+  //current
+
+  showerVideo();
+
+  blackheadVideo();
+  blackhead.volume(0.3);
+
+  bedVideo();
+  bed.volume(0.3);
+
+  tosleepVideo();
+  tosleep.volume(0.3);
+
+  tint(255, 70);
+  //underlying
+
+  paintVideo();
+  paint.volume(0.0);
+
+  thinkingVideo();
+  thinking.volume(0.0);
+
+  hospitalVideo();
+  hospital.volume(0.0);
+
+  partyVideo();
+  party.volume(0.0);
+
+  webcamCapture();
+
+  standardFont();
+
+  text("I remember (hurt like hell) Saturday night hair washings of fingernails to scalp.", 27, 400, 250, 300);
+
+  text("I remember “Now I lay me down to sleep (etc.)”", 332, 440, 250, 300);
+
+  text("I remember, just out of bed in the morning, red wrinkle designs on your skin.", 25, 90, 250, 250);
+
+  text("I remember my mother cornering me into corners to squeeze out blackheads. (Hurt like hell).", 332, 80, 250, 250);
+
+  memoriesFlow();
+}
+
+function hairStanza() {
+  tint(255, 255);
+  //current
+
+  hairVideo();
+
+  showerVideo();
+  shower.volume(0.3);
+
+  blackheadVideo();
+  blackhead.volume(0.3);
+
+  bedVideo();
+  bed.volume(0.3);
+
+  tint(255, 70);
+  //underlying
+
+  tosleepVideo();
+  tosleep.volume(0.0);
+
+  paintVideo();
+  paint.volume(0.0);
+
+  thinkingVideo();
+  thinking.volume(0.0);
+
+  hospitalVideo();
+  hospital.volume(0.0);
+
+  webcamCapture();
+
+  standardFont();
+
+  text("I remember (hurt like hell) Saturday night hair washings of fingernails to scalp.", 27, 400, 250, 300);
+
+  push();
+  textSize(16);
+  text("I remember predicting that probably someday in the future people would dye their all different colors from day to day to match whatever they happened to be wearing that day.", 332, 390, 250, 300);
+  pop();
+
+  text("I remember, just out of bed in the morning, red wrinkle designs on your skin.", 25, 90, 250, 250);
+
+  text("I remember my mother cornering me into corners to squeeze out blackheads. (Hurt like hell).", 332, 80, 250, 250);
+
+  memoriesFlow();
+}
+
+function snickeringStanza() {
+  tint(255, 255);
+  //current
+
+  image(snickering.loop(), 0, height - 600, snickering.width / 3.2, snickering.height / 1.8);
+
+  hairVideo();
+  hair.volume(0.3);
+
+  showerVideo();
+  shower.volume(0.3);
+
+  blackheadVideo();
+  blackhead.volume(0.3);
+
+  tint(255, 70);
+  //underlying
+
+  bedVideo();
+  bed.volume(0.0);
+
+  tosleepVideo();
+  tosleep.volume(0.0);
+
+  paintVideo();
+  paint.volume(0.0);
+
+  thinkingVideo();
+  thinking.volume(0.0);
+
+  webcamCapture();
+  standardFont();
+
+  text("I remember (hurt like hell) Saturday night hair washings of fingernails to scalp.", 27, 400, 250, 300);
+
+  push();
+  textSize(16);
+  text("I remember predicting that probably someday in the future people would dye their all different colors from day to day to match whatever they happened to be wearing that day.", 332, 390, 250, 300);
+  pop();
+
+  text("I remember a teacher who used to use the word ‘queer’ a lot (meaning ‘unusual’) and a lot of snickering.", 25, 80, 250, 250);
+
+  text("I remember my mother cornering me into corners to squeeze out blackheads. (Hurt like hell).", 332, 80, 250, 250);
+
+  memoriesFlow();
+}
+
+function gradualStanza() {
+  tint(255, 255);
+  //current
+
+  gradualVideo();
+
+  snickeringVideo();
+  snickering.volume(0.3);
+
+  hairVideo();
+  hair.volume(0.3);
+
+  showerVideo();
+  shower.volume(0.3);
+
+  tint(255, 70);
+  //underlying
+
+  blackheadVideo();
+  blackhead.volume(0.0);
+
+  bedVideo();
+  bed.volume(0.0);
+
+  tosleepVideo();
+  tosleep.volume(0.0);
+
+  paintVideo();
+  paint.volume(0.0);
+
+  webcamCapture();
+
+  standardFont();
+
+  text("I remember (hurt like hell) Saturday night hair washings of fingernails to scalp.", 27, 400, 250, 300);
+
+  push();
+  textSize(16);
+  text("I remember predicting that probably someday in the future people would dye their all different colors from day to day to match whatever they happened to be wearing that day.", 332, 390, 250, 300);
+  pop();
+
+  text("I remember a teacher who used to use the word ‘queer’ a lot (meaning ‘unusual’) and a lot of snickering.", 25, 80, 250, 250);
+
+  push();
+  textSize(15);
+  text("I remember when the word ‘fairy’ began to evoke snickering not knowing why. Then later, I do remember knowing why. What I don’t remember is how I learned what it meant. Just a gradual process of putting two and two together, I guess. Plus a bit of speculation.", 332, 75, 250, 250);
+  pop();
+
+  memoriesFlow();
+}
+
+function sinkStanza() {
+  tint(255, 255);
+  //current
+
+  sinkVideo();
+
+  gradualVideo();
+  gradual.volume(0.3);
+
+  snickeringVideo();
+  snickering.volume(0.3);
+
+  hairVideo();
+  hair.volume(0.3);
+
+  tint(255, 70);
+  //underlying
+
+  showerVideo();
+  shower.volume(0.0);
+
+  blackheadVideo();
+  blackhead.volume(0.0);
+
+  bedVideo();
+  bed.volume(0.0);
+
+  tosleepVideo();
+  tosleep.volume(0.0);
+
+  webcamCapture();
+
+  standardFont();
+
+  text("I remember white rubber sink plugs on chains.", 27, 430, 250, 300);
+
+  push();
+  textSize(16);
+  text("I remember predicting that probably someday in the future people would dye their all different colors from day to day to match whatever they happened to be wearing that day.", 332, 390, 250, 300);
+  pop();
+
+  text("I remember a teacher who used to use the word ‘queer’ a lot (meaning ‘unusual’) and a lot of snickering.", 25, 80, 250, 250);
+
+  push();
+  textSize(15);
+  text("I remember when the word ‘fairy’ began to evoke snickering not knowing why. Then later, I do remember knowing why. What I don’t remember is how I learned what it meant. Just a gradual process of putting two and two together, I guess. Plus a bit of speculation.", 332, 75, 250, 250);
+  pop();
+
+  memoriesFlow();
+}
+
+function bathtubStanza() {
+  tint(255, 255);
+  //430
+
+  bathtubVideo();
+
+  sinkVideo();
+  sink.volume(0.3);
+
+  gradualVideo();
+  gradual.volume(0.3);
+
+  snickeringVideo();
+  snickering.volume(0.3);
+
+  tint(255, 70);
+  //underlying
+
+  hairVideo();
+  hair.volume(0.0);
+
+  showerVideo();
+  shower.volume(0.0);
+
+  blackheadVideo();
+  blackhead.volume(0.0);
+
+  bedVideo();
+  bed.volume(0.0);
+
+  webcamCapture();
+
+  standardFont();
+
+  text("I remember white rubber sink plugs on chains.", 27, 430, 250, 300);
+
+  text("I remember not to stand up in the bathtub because I might slip and fall and bash my head open. ", 332, 400, 250, 300);
+
+  text("I remember a teacher who used to use the word ‘queer’ a lot (meaning ‘unusual’) and a lot of snickering.", 25, 80, 250, 250);
+
+  push();
+  textSize(15);
+  text("I remember when the word ‘fairy’ began to evoke snickering not knowing why. Then later, I do remember knowing why. What I don’t remember is how I learned what it meant. Just a gradual process of putting two and two together, I guess. Plus a bit of speculation.", 332, 75, 250, 250);
+  pop();
+
+  memoriesFlow();
+}
+
+function lastStanza() {
+  tint(255, 255);
+
+  lastVideo();
+
+  bathtubVideo();
+  bathtub.volume(0.3);
+
+  sinkVideo();
+  sink.volume(0.3);
+
+  gradualVideo();
+  gradual.volume(0.3);
+
+  tint(255, 70);
+  //underlying
+
+  snickeringVideo();
+  snickering.volume(0.0);
+
+  hairVideo();
+  hair.volume(0.0);
+
+  showerVideo();
+  shower.volume(0.0);
+
+  blackheadVideo();
+  blackhead.volume(0.0);
+
+  webcamCapture();
+
+  standardFont();
+
+  text("I remember white rubber sink plugs on chains.", 27, 430, 250, 300);
+
+  text("I remember not to stand up in the bathtub because I might slip and fall and bash my head open. ", 332, 400, 250, 300);
+
+  text("I remember ‘This is the last time I’m going to tell you.’", 25, 100, 250, 250);
+
+  push();
+  textSize(15);
+  text("I remember when the word ‘fairy’ began to evoke snickering not knowing why. Then later, I do remember knowing why. What I don’t remember is how I learned what it meant. Just a gradual process of putting two and two together, I guess. Plus a bit of speculation.", 332, 75, 250, 250);
+  pop();
+
+  memoriesFlow();
+}
+
+function whyStanza() {
+  tint(255, 255);
+
+  whyVideo();
+  
+  lastVideo();
+  last.volume(0.3);
+
+  bathtubVideo();
+  bathtub.volume(0.3);
+
+  sinkVideo();
+  sink.volume(0.3);
+
+  tint(255, 70);
+  //underlying
+
+  gradualVideo();
+  gradual.volume(0.0);
+
+  snickeringVideo();
+  snickering.volume(0.0);
+
+  hairVideo();
+  hair.volume(0.0);
+
+  showerVideo();
+  shower.volume(0.0);
+
+  webcamCapture();
+
+  standardFont();
+
+  text("I remember white rubber sink plugs on chains.", 27, 430, 250, 300);
+
+  text("I remember not to stand up in the bathtub because I might slip and fall and bash my head open. ", 332, 400, 250, 300);
+
+  text("I remember ‘This is the last time I’m going to tell you.’", 25, 100, 250, 250);
+
+  text("I remember (in the ‘But why?’ department) ‘Because I say so, that’s why!’", 332, 100, 250, 250);
+
+  memoriesFlow();
+}
+
+function whyStanza() {
+  tint(255, 255);
+
+  whyVideo();
+  
+  lastVideo();
+  last.volume(0.3);
+
+  bathtubVideo();
+  bathtub.volume(0.3);
+
+  sinkVideo();
+  sink.volume(0.3);
+
+  tint(255, 70);
+  //underlying
+
+  gradualVideo();
+  gradual.volume(0.0);
+
+  snickeringVideo();
+  snickering.volume(0.0);
+
+  hairVideo();
+  hair.volume(0.0);
+
+  showerVideo();
+  shower.volume(0.0);
+
+  webcamCapture();
+
+  standardFont();
+
+  text("I remember white rubber sink plugs on chains.", 27, 430, 250, 300);
+
+  text("I remember not to stand up in the bathtub because I might slip and fall and bash my head open. ", 332, 400, 250, 300);
+
+  text("I remember ‘This is the last time I’m going to tell you.’", 25, 100, 250, 250);
+
+  text("I remember (in the ‘But why?’ department) ‘Because I say so, that’s why!’", 332, 100, 250, 250);
+
+  memoriesFlow();
+}
+
+function birthdayStanza() {
+  tint(255, 255);
+
+  birthdayVideo();
+
+  whyVideo();
+
+  lastVideo();
+  last.volume(0.3);
+
+  bathtubVideo();
+  bathtub.volume(0.3);
+
+  tint(255, 70);
+  //underlying
+
+  sinkVideo();
+  sink.volume(0.0);
+
+  gradualVideo();
+  gradual.volume(0.0);
+
+  snickeringVideo();
+  snickering.volume(0.0);
+
+  hairVideo();
+  hair.volume(0.0);
+
+  webcamCapture();
+
+  standardFont();
+
+  text("I remember birthday parties.", 27, 430, 250, 300);
+
+  text("I remember not to stand up in the bathtub because I might slip and fall and bash my head open. ", 332, 400, 250, 300);
+
+  text("I remember ‘This is the last time I’m going to tell you.’", 25, 100, 250, 250);
+
+  text("I remember (in the ‘But why?’ department) ‘Because I say so, that’s why!’", 332, 100, 250, 250);
+
+  memoriesFlow();
+}
+
+function icecreamStanza() {
+  tint(255, 255);
+
+  icecreamVideo();
+
+  birthdayVideo();
+  birthday.volume(0.3);
+
+  whyVideo();
+  why.volume(0.3);
+
+  lastVideo();
+  last.volume(0.3);
+
+  tint(255, 70);
+  //underlying
+
+  bathtubVideo();
+  bathtub.volume(0.0);
+
+  sinkVideo();
+  sink.volume(0.0);
+
+  gradualVideo();
+  gradual.volume(0.0);
+
+  snickeringVideo();
+  snickering.volume(0.0);
+
+  webcamCapture();
+
+  standardFont()
+
+  text("I remember birthday parties.", 27, 430, 250, 300);
+
+  text("I remember pink and brown and white ice cream in layers.", 332, 422, 250, 300);
+
+  text("I remember ‘This is the last time I’m going to tell you.’", 25, 100, 250, 250);
+
+  text("I remember (in the ‘But why?’ department) ‘Because I say so, that’s why!’", 332, 100, 250, 250);
+
+  memoriesFlow();
+}
+
+function umbrellaStanza() {
+  tint(255, 255);
+
+  umbrellaVideo();
+
+  icecreamVideo();
+  icecream.volume(0.3);
+
+  birthdayVideo();
+  birthday.volume(0.3);
+
+  whyVideo();
+  why.volume(0.3);
+
+  tint(255, 70);
+  //underlying
+
+  lastVideo();
+  last.volume(0.0);
+
+  bathtubVideo();
+  bathtub.volume(0.0);
+
+  sinkVideo();
+  sink.volume(0.0);
+
+  gradualVideo();
+  gradual.volume(0.0);
+
+  webcamCapture();
+
+  standardFont();
+
+  text("I remember birthday parties.", 27, 430, 250, 300);
+
+  text("I remember pink and brown and white ice cream in layers.", 332, 422, 250, 300);
+
+  text("I remember little silk American flags. And little bamboo and paper Japanese umbrellas that, if you tried to open them all the way up, broke.", 25, 80, 250, 250);
+
+  text("I remember (in the ‘But why?’ department) ‘Because I say so, that’s why!’", 332, 100, 250, 250);
+
+  memoriesFlow();
+}
+
+function candlesStanza() {
+  tint(255, 255);
+
+  candlesVideo();
+
+  umbrellaVideo();
+  umbrella.volume(0.3);
+
+  icecreamVideo();
+  icecream.volume(0.3);
+
+  birthdayVideo();
+  birthday.volume(0.3);
+
+  tint(255, 70);
+  //underlying
+
+  lastVideo();
+  last.volume(0.0);
+
+  whyVideo();
+  why.volume(0.0);
+
+  bathtubVideo();
+  bathtub.volume(0.0);
+
+  sinkVideo();
+  sink.volume(0.0);
+
+  webcamCapture();
+
+  standardFont();
+
+  text("I remember birthday parties.", 27, 430, 250, 300);
+
+  text("I remember pink and brown and white ice cream in layers.", 332, 422, 250, 300);
+
+  text("I remember little silk American flags. And little bamboo and paper Japanese umbrellas that, if you tried to open them all the way up, broke.", 25, 80, 250, 250);
+
+  text("I remember at last only pretending to make a wish before blowing the candles out.", 332, 100, 250, 250);
+
+  memoriesFlow();
+}
+
+function roundStanza() {
+  tint(255, 255);
+
+  rounddVideo();
+
+  candlesVideo();
+  candles.volume(0.3);
+
+  umbrellaVideo();
+  umbrella.volume(0.3);
+
+  icecreamVideo();
+  icecream.volume(0.3);
+
+  tint(255, 70);
+  //underlying
+
+  lastVideo();
+  last.volume(0.0);
+
+  birthdayVideo();
+  birthday.volume(0.0);
+
+  whyVideo();
+  why.volume(0.0);
+
+  bathtubVideo();
+  bathtub.volume(0.0);
+
+  webcamCapture();
+
+  standardFont();
+
+  text("I remember how hard it was to get a round of ‘Happy Birthday’ going.", 27, 422, 250, 300);
+
+  text("I remember pink and brown and white ice cream in layers.", 332, 422, 250, 300);
+
+  text("I remember little silk American flags. And little bamboo and paper Japanese umbrellas that, if you tried to open them all the way up, broke.", 25, 80, 250, 250);
+
+  text("I remember at last only pretending to make a wish before blowing the candles out.", 332, 100, 250, 250);
+
+  memoriesFlow();
+}
+
+function donkeyStanza() {
+  tint(255, 255);
+
+  donkeyVideo();
+
+  rounddVideo();
+  roundd.volume(0.3);
+
+  candlesVideo();
+  candles.volume(0.3);
+
+  umbrellaVideo();
+  umbrella.volume(0.3);
+
+  tint(255, 70);
+  //underlying
+
+  icecreamVideo();
+  icecream.volume(0.0);
+
+  lastVideo();
+  last.volume(0.0);
+
+  birthdayVideo();
+  birthday.volume(0.0);
+
+  whyVideo();
+  why.volume(0.0);
+
+  webcamCapture();
+
+  standardFont();
+
+  text("I remember how hard it was to get a round of ‘Happy Birthday’ going.", 27, 422, 250, 300);
+
+  text("I remember never going to a party where we played Pin the Tail on the Donkey.", 332, 405, 250, 300);
+
+  text("I remember little silk American flags. And little bamboo and paper Japanese umbrellas that, if you tried to open them all the way up, broke.", 25, 80, 250, 250);
+
+  text("I remember at last only pretending to make a wish before blowing the candles out.", 332, 100, 250, 250);
+
+  memoriesFlow();
+}
+
+function cornStanza() {
+  tint(255, 255);
+
+  cornVideo();
+
+  donkeyVideo();
+  donkey.volume(0.3);
+
+  rounddVideo();
+  roundd.volume(0.3);
+
+  candlesVideo();
+  candles.volume(0.3);
+
+  tint(255, 70);
+  //underlying
+
+  umbrellaVideo();
+  umbrella.volume(0.0);
+
+  icecreamVideo();
+  icecream.volume(0.0);
+
+  birthdayVideo();
+  birthday.volume(0.0);
+
+  whyVideo();
+  why.volume(0.0);
+
+  webcamCapture();
+
+  standardFont();
+
+  text("I remember how hard it was to get a round of ‘Happy Birthday’ going.", 27, 422, 250, 300);
+
+  text("I remember never going to a party where we played Pin the Tail on the Donkey.", 332, 405, 250, 300);
+
+  text("I remember canned cream corn.", 25, 125, 250, 250);
+
+  text("I remember at last only pretending to make a wish before blowing the candles out.", 332, 100, 250, 250);
+
+  memoriesFlow();
+}
+
+function wheatStanza() {
+  tint(255, 255);
+
+  wheatVideo();
+
+  cornVideo();
+  corn.volume(0.3);
+
+  donkeyVideo();
+  donkey.volume(0.3);
+
+  rounddVideo();
+  roundd.volume(0.3);
+
+  tint(255, 70);
+  //underlying
+
+  candlesVideo();
+  candles.volume(0.0);
+
+  umbrellaVideo();
+  umbrella.volume(0.0);
+
+  icecreamVideo();
+  icecream.volume(0.0);
+
+  birthdayVideo();
+  birthday.volume(0.0);
+
+  webcamCapture();
+
+  standardFont();
+
+  text("I remember how hard it was to get a round of ‘Happy Birthday’ going.", 27, 422, 250, 300);
+
+  text("I remember never going to a party where we played Pin the Tail on the Donkey.", 332, 405, 250, 300);
+
+  text("I remember canned cream corn.", 25, 125, 250, 250);
+
+  text("I remember Cream of Wheat lumps.", 332, 125, 250, 250);
+
+  memoriesFlow();
+}
+
+function beefStanza() {
+  tint(255, 255);
+
+  beefVideo();
+
+  wheatVideo();
+  wheat.volume(0.3);
+
+  cornVideo();
+  corn.volume(0.3);
+
+  donkeyVideo();
+  donkey.volume(0.3);
+
+  tint(255, 70);
+  //underlying
+
+  rounddVideo();
+  roundd.volume(0.0);
+
+  candlesVideo();
+  candles.volume(0.0);
+
+  umbrellaVideo();
+  umbrella.volume(0.0);
+
+  icecreamVideo();
+  icecream.volume(0.0);
+
+  webcamCapture();
+
+  standardFont();
+
+  text("I remember roast beef and carrots and potatoes and gravy and, underneath it all, a piece of soggy white bread: the best part.", 27, 385, 250, 300);
+
+  text("I remember never going to a party where we played Pin the Tail on the Donkey.", 332, 405, 250, 300);
+
+  text("I remember canned cream corn.", 25, 125, 250, 250);
+
+  text("I remember Cream of Wheat lumps.", 332, 125, 250, 250);
+
+  memoriesFlow();
+}
+
+function beetStanza() {
+  tint(255, 255);
+
+  beetVideo();
+
+  beefVideo();
+  beef.volume(0.3);
+
+  wheatVideo();
+  wheat.volume(0.3);
+
+  cornVideo();
+  corn.volume(0.3);
+
+  tint(255, 70);
+  //underlying
+
+  donkeyVideo();
+  donkey.volume(0.0);
+
+  rounddVideo();
+  roundd.volume(0.0);
+
+  candlesVideo();
+  candles.volume(0.0);
+
+  umbrellaVideo();
+  umbrella.volume(0.0);
+
+  webcamCapture();
+
+  standardFont();
+
+  text("I remember roast beef and carrots and potatoes and gravy and, underneath it all, a piece of soggy white bread: the best part.", 27, 385, 250, 300);
+
+  text("I remember, when your beet juice runs into your mashed potatoes – red mashed potations!", 332, 405, 250, 300);
+
+  text("I remember canned cream corn.", 25, 125, 250, 250);
+
+  text("I remember Cream of Wheat lumps.", 332, 125, 250, 250);
+
+  memoriesFlow();
+}
+
+function calendarStanza() {
+  tint(255, 255);
+
+  calendarVideo();
+
+  beetVideo();
+  beet.volume(0.3);
+
+  beefVideo();
+  beef.volume(0.3);
+
+  wheatVideo();
+  wheat.volume(0.3);
+
+  tint(255, 70);
+  //underlying
+
+  cornVideo();
+  corn.volume(0.0);
+
+  donkeyVideo();
+  donkey.volume(0.0);
+
+  rounddVideo();
+  roundd.volume(0.0);
+
+  candlesVideo();
+  candles.volume(0.0);
+
+  webcamCapture();
+
+  standardFont();
+
+  text("I remember roast beef and carrots and potatoes and gravy and, underneath it all, a piece of soggy white bread: the best part.", 27, 385, 250, 300);
+
+  text("I remember, when your beet juice runs into your mashed potatoes – red mashed potations!", 332, 405, 250, 300);
+
+  push();
+  textSize(12);
+  text("I remember looking forward to a certain thing or event that is going to happen, and trying to visualize its actually happening and not understanding ‘time’ one bit. (Frustrating.) Frustrating because, at times, one can almost grab it. But then you realize it’s too slippery, and just too complicated, and so you lose your footing, totally back to nowhere. (Frustrating.) Still believing that a certain sort of understanding is somehow possible, if approached delicately enough, from just the right angle.", 25, 60, 250, 250);
+  pop();
+
+  text("I remember Cream of Wheat lumps.", 332, 125, 250, 250);
+  memoriesFlow();
+}
+
+function microscopicStanza() {
+  tint(255, 255);
+
+  microscopicVideo();
+
+  calendarVideo();
+  calendar.volume(0.3);
+
+  beetVideo();
+  beet.volume(0.3);
+
+  beefVideo();
+  beef.volume(0.3);
+
+  tint(255, 70);
+  //underlying
+
+  wheatVideo();
+  wheat.volume(0.0);
+
+  cornVideo();
+  corn.volume(0.0);
+
+  donkeyVideo();
+  donkey.volume(0.0);
+
+  rounddVideo();
+  roundd.volume(0.0);
+
+  webcamCapture();
+
+  standardFont();
+
+  text("I remember roast beef and carrots and potatoes and gravy and, underneath it all, a piece of soggy white bread: the best part.", 27, 385, 250, 300);
+
+  text("I remember, when your beet juice runs into your mashed potatoes – red mashed potations!", 332, 405, 250, 300);
+
+  push();
+  textSize(12);
+  text("I remember looking forward to a certain thing or event that is going to happen, and trying to visualize its actually happening and not understanding ‘time’ one bit. (Frustrating.) Frustrating because, at times, one can almost grab it. But then you realize it’s too slippery, and just too complicated, and so you lose your footing, totally back to nowhere. (Frustrating.) Still believing that a certain sort of understanding is somehow possible, if approached delicately enough, from just the right angle.", 25, 60, 250, 250);
+  pop();
+
+  text("I remember floating transparent spots before my eyes, every now and then, for a moment (microscopic) like when you stand up real fast.", 332, 80, 250, 250);
+
+  memoriesFlow();
+}
+
+function claustrophobicStanza() {
+  tint(255, 255);
+
+  claustrophobicVideo();
+
+  microscopicVideo();
+  microscopic.volume(0.3);
+
+  calendarVideo();
+  calendar.volume(0.3);
+
+  beetVideo();
+  beet.volume(0.3);
+
+  tint(255, 70);
+  //underlying
+
+  beefVideo();
+  beef.volume(0.0);
+
+  wheatVideo();
+  wheat.volume(0.0);
+
+  cornVideo();
+  corn.volume(0.0);
+
+  donkeyVideo();
+  donkey.volume(0.0);
+
+  webcamCapture();
+
+  standardFont();
+
+  text("I remember many claustrophobic dreams of being tight and endless places that get even more tight and more endless, and not being able to get out.", 27, 380, 250, 300);
+
+  text("I remember, when your beet juice runs into your mashed potatoes – red mashed potations!", 332, 405, 250, 300);
+
+  push();
+  textSize(12);
+  text("I remember looking forward to a certain thing or event that is going to happen, and trying to visualize its actually happening and not understanding ‘time’ one bit. (Frustrating.) Frustrating because, at times, one can almost grab it. But then you realize it’s too slippery, and just too complicated, and so you lose your footing, totally back to nowhere. (Frustrating.) Still believing that a certain sort of understanding is somehow possible, if approached delicately enough, from just the right angle.", 25, 60, 250, 250);
+  pop();
+
+  text("I remember floating transparent spots before my eyes, every now and then, for a moment (microscopic) like when you stand up real fast.", 332, 80, 250, 250);
+
+  memoriesFlow();
+}
+
+function breathingStanza() {
+  tint(255, 255);
+
+  breathingVideo();
+
+  claustrophobicVideo();
+  claustrophobic.volume(0.3);
+
+  microscopicVideo();
+  microscopic.volume(0.3);
+
+  calendarVideo();
+  calendar.volume(0.3);
+
+  tint(255, 70);
+  //underlying
+
+  beetVideo();
+  beet.volume(0.0);
+
+  beefVideo();
+  beef.volume(0.0);
+
+  wheatVideo();
+  wheat.volume(0.0);
+
+  cornVideo();
+  corn.volume(0.0);
+
+  webcamCapture();
+  standardFont();
+
+  text("I remember many claustrophobic dreams of being tight and endless places that get even more tight and more endless, and not being able to get out.", 27, 380, 250, 300);
+
+  push();
+  textSize(18);
+  text("I remember thinking about breathing, and then your head takes over the effort of breathing, and you see that it’s ‘hard work,’ and it’s all very spooky somehow.", 332, 400, 250, 300);
+  pop();
+
+  push();
+  textSize(12);
+  text("I remember looking forward to a certain thing or event that is going to happen, and trying to visualize its actually happening and not understanding ‘time’ one bit. (Frustrating.) Frustrating because, at times, one can almost grab it. But then you realize it’s too slippery, and just too complicated, and so you lose your footing, totally back to nowhere. (Frustrating.) Still believing that a certain sort of understanding is somehow possible, if approached delicately enough, from just the right angle.", 25, 60, 250, 250);
+  pop();
+
+  text("I remember floating transparent spots before my eyes, every now and then, for a moment (microscopic) like when you stand up real fast.", 332, 80, 250, 250);
+
+  memoriesFlow();
+}
+
+function toprightgoneStanza() {
+  background(0);
+  tint(255, 255);
+  microscopic.volume(0.0);
+
+  breathingVideo();
+  breathing.volume(0.3);
+
+  claustrophobicVideo();
+  claustrophobic.volume(0.3);
+
+  calendarVideo();
+  calendar.volume(0.3);
+
+  tint(255, 70);
+  //underlying
+
+  beetVideo();
+  beet.volume(0.0);
+
+  beefVideo();
+  beef.volume(0.3);
+
+  cornVideo();
+  corn.volume(0.0);
+
+  standardFont();
+  webcamCapture();
+
+  text("I remember many claustrophobic dreams of being tight and endless places that get even more tight and more endless, and not being able to get out.", 27, 380, 250, 300);
+
+  push();
+  textSize(18);
+  text("I remember thinking about breathing, and then your head takes over the effort of breathing, and you see that it’s ‘hard work,’ and it’s all very spooky somehow.", 332, 400, 250, 300);
+  pop();
+
+  push();
+  textSize(12);
+  text("I remember looking forward to a certain thing or event that is going to happen, and trying to visualize its actually happening and not understanding ‘time’ one bit. (Frustrating.) Frustrating because, at times, one can almost grab it. But then you realize it’s too slippery, and just too complicated, and so you lose your footing, totally back to nowhere. (Frustrating.) Still believing that a certain sort of understanding is somehow possible, if approached delicately enough, from just the right angle.", 25, 60, 250, 250);
+  pop();
+
+  memoriesFlow();
+}
+
+function bottomleftgoneStanza() {
+  background(0);
+  tint(255, 255);
+
+  claustrophobic.volume(0.0);
+
+  breathingVideo();
+  breathing.volume(0.3);
+
+  calendarVideo();
+  calendar.volume(0.3);
+
+  tint(255, 70);
+  //underlying
+
+  beetVideo();
+  beet.volume(0.0);
+
+  cornVideo();
+  corn.volume(0.0);
+
+  standardFont();
+  webcamCapture();
+
+  push();
+  textSize(18);
+  text("I remember thinking about breathing, and then your head takes over the effort of breathing, and you see that it’s ‘hard work,’ and it’s all very spooky somehow.", 332, 400, 250, 300);
+  pop();
+
+  push();
+  textSize(12);
+  text("I remember looking forward to a certain thing or event that is going to happen, and trying to visualize its actually happening and not understanding ‘time’ one bit. (Frustrating.) Frustrating because, at times, one can almost grab it. But then you realize it’s too slippery, and just too complicated, and so you lose your footing, totally back to nowhere. (Frustrating.) Still believing that a certain sort of understanding is somehow possible, if approached delicately enough, from just the right angle.", 25, 60, 250, 250);
+  pop();
+
+  memoriesFlow();
+}
+
+function topleftgoneStanza() {
+  background(0);
+  tint(255, 255);
+
+  calendar.volume(0.0);
+
+  breathingVideo();
+  breathing.volume(0.3);
+
+  tint(255, 70);
+  //underlying
+
+  beetVideo();
+  beet.volume(0.0);
+
+  standardFont();
+  webcamCapture();
+
+  push();
+  textSize(18);
+  text("I remember thinking about breathing, and then your head takes over the effort of breathing, and you see that it’s ‘hard work,’ and it’s all very spooky somehow.", 332, 400, 250, 300);
+  pop();
+  memoriesFlow();
+}
+
+function bottomrightgoneStanza() {
+  background(0);
+  breathing.volume(0.0);
+  beef.volume(0.0);
+  whitenoise.setVolume(0.0);
+  webcamCapture();
+  memoriesFlow();
+}
+
+function nothingStanza() {
+  background(0);
+  breathing.volume(0.0);
+  beef.volume(0.0);
+  whitenoise.setVolume(0.0);
+}
+
+function movingLines() {
+
+  r = random(251);
+  g = random(91);
+  b = random(85, 105);
+
+  for (var i = 0; i < words.length; i++) {
+    fill(r, g, b);
+    text(words[i], random(width), random(height))
+  }
+}
+
+function standardFont() {
+  stroke(0);
+  strokeWeight(2)
+  textFont("American Typewriter");
+  fill(255);
+  textAlign(CENTER);
+  textSize(20);
+}
+
+function beginningSquares() {
+  noStroke();
+  fill(0, 63, 92);
+  rect(0, 0, 300, 300);
+  fill(71, 43, 92);
+  rect(300, 0, 300, 300);
+  fill(188, 72, 115);
+  rect(0, 300, 300, 300);
+  fill(251, 91, 90);
+  rect(300, 300, 300, 300);
+  //squares
+}
+
+function webcamCapture() {
+  push();
+  tint(255, 50);
+  image(capture, 0, 0, 600, 600);
+  pop();
+}
+
+class strand {
+
+  constructor(x, y) {
+    this.x = x;
+    this.y = y;
+    this.history = [];
+  }
+
+  update() {
+    this.x = this.x + random(-5, 5);
+    this.y = this.y + random(-5, 5);
+
+    let c = createVector(this.x, this.y);
+
+    this.history.push(c);
+  }
+
+  show() {
+    stroke(251, 91, 90, 3);
+    beginShape();
+    for (let i = 0; i < this.history.length; i++) {
+      let pos = this.history[i];   
+      fill(71, 43, 92, 2);
+      vertex(pos.x, pos.y); 
+      endShape();
+    }
+  }
+}
+
+function memoriesFlow() {
+  for (let i = 0; i < memories.length; i++) {
+    memories[i].show();
+    memories[i].update();
+  }
+}
+
+function dejavuVideo() {
+  image(dejavu.loop(), 0, height - 600, dejavu.width / 3.2, dejavu.height / 1.8);
+}
+
+function cryingVideo() {
+  image(crying.loop(), 300, height - 600, crying.width / 3, crying.height / 1.8);
+}
+
+function isolationVideo() {
+  image(isolation.loop(), 0, height / 2, isolation.width / 3.2, isolation.height / 1.8);
+}
+
+function partyVideo() {
+  image(party.loop(), 300, height / 2, party.width / 3.2, party.height / 1.8);
+}
+
+function hospitalVideo() {
+  image(hospital.loop(), 0, height - 600, hospital.width / 3.2, hospital.height / 1.8);
+}
+
+function thinkingVideo() {
+  image(thinking.loop(), 300, height - 600, thinking.width / 3, thinking.height / 1.8);
+}
+
+function paintVideo() {
+  image(paint.loop(), 0, height / 2, paint.width / 3.2, paint.height / 1.8);
+}
+
+function tosleepVideo() {
+  image(tosleep.loop(), 300, height / 2, tosleep.width / 3.2, tosleep.height / 1.8);
+}
+
+function bedVideo() {
+  image(bed.loop(), 0, height - 600, bed.width / 3.2, bed.height / 1.8);
+}
+
+function blackheadVideo() {
+  image(blackhead.loop(), 300, height - 600, blackhead.width / 3, blackhead.height / 1.8);
+}
+
+function showerVideo() {
+  image(shower.loop(), 0, height / 2, shower.width / 3.2, shower.height / 1.8);
+}
+
+function hairVideo() {
+  image(hair.loop(), 300, height / 2, hair.width / 3.2, hair.height / 1.8);
+}
+
+function snickeringVideo() {
+  image(snickering.loop(), 0, height - 600, snickering.width / 3.2, snickering.height / 1.8);
+}
+
+function gradualVideo() {
+  image(gradual.loop(), 300, height - 600, gradual.width / 3, gradual.height / 1.8);
+}
+
+function sinkVideo() {
+  image(sink.loop(), 0, height / 2, sink.width / 3.2, sink.height / 1.8);
+}
+
+function bathtubVideo() {
+  image(bathtub.loop(), 300, height / 2, bathtub.width / 3.2, bathtub.height / 1.8);
+}
+
+function lastVideo() {
+  image(last.loop(), 0, height - 600, last.width / 3.2, last.height / 1.8);
+}
+
+function whyVideo() {
+  image(why.loop(), 300, height - 600, why.width / 3, why.height / 1.8);
+}
+
+function birthdayVideo() {
+  image(birthday.loop(), 0, height / 2, birthday.width / 3.2, birthday.height / 1.8);
+}
+
+function icecreamVideo() {
+  image(icecream.loop(), 300, height / 2, icecream.width / 3.2, icecream.height / 1.8);
+}
+
+function candlesVideo() {
+  image(candles.loop(), 300, height - 600, candles.width / 3.2, candles.height / 1.8);
+}
+
+function rounddVideo() {
+  image(roundd.loop(), 0, height / 2, roundd.width / 3.2, roundd.height / 1.8);
+}
+
+function donkeyVideo() {
+  image(donkey.loop(), 300, height / 2, donkey.width / 3.2, donkey.height / 1.8);
+}
+
+function umbrellaVideo() {
+  image(umbrella.loop(), 0, height - 600, umbrella.width / 3.2, umbrella.height / 1.8);
+}
+
+function beefVideo() {
+  image(beef.loop(), 0, height / 2, beef.width / 3.2, beef.height / 1.8);
+}
+
+function beetVideo() {
+  image(beet.loop(), 300, height / 2, beet.width / 3.2, beet.height / 1.8);
+}
+
+function cornVideo() {
+  image(corn.loop(), 0, height - 600, corn.width / 3.2, corn.height / 1.8);
+}
+
+function wheatVideo() {
+  image(wheat.loop(), 300, height - 600, wheat.width / 3, wheat.height / 1.8);
+}
+
+function calendarVideo() {
+  image(calendar.loop(), 0, height - 600, calendar.width / 3.2, calendar.height / 1.8);
+}
+
+function microscopicVideo() {
+  image(microscopic.loop(), 300, height - 600, microscopic.width / 3.2, microscopic.height / 1.8);
+}
+
+function claustrophobicVideo() {
+  image(claustrophobic.loop(), 0, height / 2, claustrophobic.width / 3.2, claustrophobic.height / 1.8);
+}
+
+function breathingVideo() {
+  image(breathing.loop(), 300, height / 2, breathing.width / 3.2, breathing.height / 1.8);
+}
+
+function rememberText() {
+  textAlign(LEFT);
+  textSize(30);
+  text("I Remember", 50, 120);
+  textSize(18);
+  text("Joe Bainard", 50, 150);
+}
+
+function wellKnown() {
+  textAlign(CENTER);
+  textSize(16);
+  text("He is well-known for 'I Remember,' which radically departs from the conventions of a traditional memoir. In the book, strands of memories flow to form the author's identity. He died of AIDS-induced pneumonia at the age of 52.", 27, 394, 250, 300);
+}
